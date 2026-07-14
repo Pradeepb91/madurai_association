@@ -10,7 +10,7 @@ from .forms import ComplaintForm, SuggestionForm
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("Madurai Association Website is Live")
+    return render(request, "base.html")
 
 
 def reports(request):
