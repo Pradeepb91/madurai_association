@@ -1,0 +1,58 @@
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        Admin Dashboard
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card bg-success text-white mb-3">
+
+                <div class="card-body text-center">
+
+                    <h3>{{ total_complaints }}</h3>
+
+                    <h5>Total Complaints</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card bg-primary text-white mb-3">
+
+                <div class="card-body text-center">
+
+                    <h3>{{ total_suggestions }}</h3>
+
+                    <h5>Total Suggestions</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+
+        <a href="{% url 'export_complaints' %}"
+           class="btn btn-success btn-lg me-3">
+            📗 Export Complaints
+        </a>
+
+        <a href="{% url 'export_suggestions' %}"
+           class="btn btn-primary btn-lg">
+            📘 Export Suggestions
+        </a>
+
+    </div>
+
+</div>
+

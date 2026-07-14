@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="report-page">
+
+    <h2 class="text-primary mb-4">
+
+        Association Reports
+	<form method="GET" class="mb-4">
+
+    <div class="input-group">
+
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search Reports..."
+               value="{{ request.GET.search }}">
+
+        <button class="btn btn-primary">
+
+            🔍 Search
+
+        </button>
+
+    </div>
+
+</form>
+
+    </h2>
+
+    <p class="text-muted">
+
+        View and download all association reports.
+
+    </p>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-primary">
+
+            <tr>
+
+                <th width="80">S.No</th>
+
+                <th>📄 Report Name</th>
+
+                <th width="150">Uploaded On</th>
+
+                <th width="180">Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for report in reports %}
+
+            <tr>
+
+                <td>{{ forloop.counter }}</td>
+
+                <td>{{ report.title }}</td>
+
+                <td>{{ report.created_at|date:"d-m-Y" }}</td>
+
+                <td>
+
+                    <a href="{{ report.report_file.url }}"
+                       target="_blank"
+                       class="btn btn-primary btn-sm">
+
+                        Open PDF
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="4" class="text-center">
+
+                    No reports found.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+</div>
+
+{% endblock %}

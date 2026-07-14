@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>Complaint Management</h2>
+
+<form method="GET">
+
+<div class="input-group mb-4">
+
+<input
+type="text"
+class="form-control"
+name="search"
+placeholder="Complaint No / Mobile / House No"
+value="{{ search }}">
+
+<button class="btn btn-primary">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+<table class="table table-bordered table-striped">
+
+<thead>
+
+<tr>
+
+<th>Complaint No</th>
+
+<th>House No</th>
+
+<th>Name</th>
+
+<th>Mobile</th>
+
+<th>Category</th>
+
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for complaint in complaints %}
+
+<tr>
+
+<td>{{ complaint.complaint_number }}</td>
+
+<td>{{ complaint.house_number }}</td>
+
+<td>{{ complaint.name }}</td>
+
+<td>{{ complaint.mobile_number }}</td>
+
+<td>{{ complaint.complaint_category }}</td>
+
+<td>{{ complaint.complaint_date }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="6">
+
+No complaints found.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

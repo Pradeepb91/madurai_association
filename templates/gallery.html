@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold text-primary">
+
+            Association Gallery
+
+        </h2>
+
+        <p class="text-muted">
+
+            Explore the latest events and activities of our association.
+
+        </p>
+
+    </div>
+
+    {% for event in events %}
+
+    <div class="card shadow mb-5">
+
+        <div class="card-body">
+
+            <h3 class="text-primary">
+
+                {{ event.event_name }}
+
+            </h3>
+
+            <p class="text-muted">
+
+                <strong>Event Date :</strong>
+
+                {{ event.event_date|date:"d-m-Y" }}
+
+            </p>
+
+            {% if event.description %}
+
+            <p>
+
+                {{ event.description }}
+
+            </p>
+
+            {% endif %}
+
+            <div class="row g-3">
+
+                {% for image in event.images.all %}
+
+                <div class="col-lg-4 col-md-6">
+
+                    <a href="{{ image.image.url }}" target="_blank">
+
+                        <img src="{{ image.image.url }}"
+                             class="img-fluid rounded shadow-sm gallery-image">
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="alert alert-warning text-center">
+
+        No Gallery Events Available.
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

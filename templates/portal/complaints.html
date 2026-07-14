@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+
+    <div class="row">
+
+        <!-- Sidebar -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-dark text-white text-center">
+
+                    <h5>Admin Menu</h5>
+
+                </div>
+
+                <div class="list-group list-group-flush">
+
+                    <a href="{% url 'portal_dashboard' %}"
+                       class="list-group-item list-group-item-action">
+                        🏠 Dashboard
+                    </a>
+
+                    <a href="{% url 'portal_complaints' %}"
+                       class="list-group-item list-group-item-action active">
+                        📋 Complaint Management
+                    </a>
+
+                    <a href="{% url 'portal_suggestions' %}"
+                       class="list-group-item list-group-item-action">
+                        💡 Suggestion Management
+                    </a>
+
+                    <a href="{% url 'portal_reports' %}"
+                       class="list-group-item list-group-item-action">
+                        📄 Reports Management
+                    </a>
+
+                    <a href="/admin/association/galleryevent/"
+                       class="list-group-item list-group-item-action">
+                        🖼 Gallery Management
+                    </a>
+
+                    <a href="/admin/association/member/"
+                       class="list-group-item list-group-item-action">
+                        👥 Members Management
+                    </a>
+
+                    <a href="{% url 'admin_logout' %}"
+                       class="list-group-item list-group-item-action text-danger">
+                        🚪 Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Complaint List -->
+
+        <div class="col-md-9">
+
+            <h3 class="mb-4">
+                Complaint Management
+            </h3>
+
+            <form method="GET">
+
+                <div class="input-group mb-3">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search Complaint No / Mobile / House No"
+                        value="{{ search }}">
+
+                    <button class="btn btn-primary">
+                        Search
+                    </button>
+
+                </div>
+
+            </form>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Complaint No</th>
+
+                        <th>House No</th>
+
+                        <th>Name</th>
+
+                        <th>Mobile</th>
+
+                        <th>Category</th>
+
+                        <th>Date</th>
+			
+			<th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for complaint in complaints %}
+
+                    <tr>
+
+                        <td>{{ complaint.complaint_number }}</td>
+
+                        <td>{{ complaint.house_number }}</td>
+
+                        <td>{{ complaint.name }}</td>
+
+                        <td>{{ complaint.mobile_number }}</td>
+
+                        <td>{{ complaint.complaint_category }}</td>
+
+                 
+
+                       
+
+                            <td>{{ complaint.complaint_date|date:"d-m-Y H:i" }}</td>
+
+			<td>
+
+				{% if complaint.status == "Pending" %}
+
+				<span class="badge bg-warning text-dark">
+   				 Pending
+				</span>
+
+				{% elif complaint.status == "In Progress" %}
+
+				<span class="badge bg-info">
+    				In Progress
+				</span>
+
+				{% elif complaint.status == "Resolved" %}
+
+				<span class="badge bg-success">
+   				 Resolved
+				</span>
+
+				{% else %}
+
+				<span class="badge bg-danger">
+ 				   Rejected
+				</span>
+
+				{% endif %}
+
+		</td>
+
+<td>
+
+    <a href="{% url 'portal_complaint_detail' complaint.id %}"
+       class="btn btn-primary btn-sm">
+
+        View
+
+    </a>
+
+</td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="7" class="text-center">
+
+                            No Complaint Found
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

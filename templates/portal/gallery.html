@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+
+    <div class="row">
+
+        <!-- Sidebar -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-dark text-white text-center">
+
+                    <h5>Admin Menu</h5>
+
+                </div>
+
+                <div class="list-group list-group-flush">
+
+                    <a href="{% url 'portal_dashboard' %}" class="list-group-item list-group-item-action">
+                        🏠 Dashboard
+                    </a>
+
+                    <a href="{% url 'portal_complaints' %}" class="list-group-item list-group-item-action">
+                        📋 Complaint Management
+                    </a>
+
+                    <a href="{% url 'portal_suggestions' %}" class="list-group-item list-group-item-action">
+                        💡 Suggestion Management
+                    </a>
+
+                    <a href="{% url 'portal_reports' %}" class="list-group-item list-group-item-action">
+                        📄 Reports Management
+                    </a>
+
+                    <a href="/admin/association/galleryevent/"
+                       class="list-group-item list-group-item-action active">
+                        🖼 Gallery Management
+                    </a>
+
+                    <a href="/admin/association/member/"
+                       class="list-group-item list-group-item-action">
+                        👥 Members Management
+                    </a>
+
+                    <a href="{% url 'admin_logout' %}"
+                       class="list-group-item list-group-item-action text-danger">
+                        🚪 Logout
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Gallery -->
+
+        <div class="col-md-9">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h2>🖼 Gallery Management</h2>
+
+                <a href="/admin/association/galleryevent/add/"
+                   class="btn btn-success">
+
+                    ➕ Add Gallery Event
+
+                </a>
+
+            </div>
+
+            {% for event in events %}
+
+            <div class="card shadow mb-4">
+
+                <div class="card-body">
+
+                    <h4>{{ event.event_name }}</h4>
+
+                    <p class="text-muted">
+
+                        {{ event.event_date|date:"d-m-Y" }}
+
+                    </p>
+
+                    <p>{{ event.description }}</p>
+
+                    <div class="row">
+
+                        {% for image in event.images.all %}
+
+                        <div class="col-md-4 mb-3">
+
+                            <img src="{{ image.image.url }}"
+                                 class="img-fluid rounded shadow">
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="alert alert-warning">
+
+                No Gallery Events Available.
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
