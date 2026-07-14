@@ -7,8 +7,10 @@ from .models import Report, GalleryEvent, Member, Complaint, Suggestion
 from .forms import ComplaintForm, SuggestionForm
 
 
+from django.http import HttpResponse
+
 def home(request):
-    return render(request, "home/index.html")
+    return HttpResponse("Madurai Association Website is Live")
 
 
 def reports(request):
