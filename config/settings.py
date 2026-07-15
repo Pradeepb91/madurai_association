@@ -23,7 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nuphbdp%n47f58xw*%%@akg*p(k8$sa$!7!d0_7fo5v-az!3^#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
+
+
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "madurai-newlig-association.onrender.com",
@@ -62,7 +65,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
@@ -78,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+		'django.template.context_processors.debug',
             ],
         },
     },

@@ -10,7 +10,7 @@ from .forms import ComplaintForm, SuggestionForm
 from django.http import HttpResponse
 
 def home(request):
-    return render(request, "base.html")
+    return render(request, "home/index.html")
 
 
 def reports(request):
