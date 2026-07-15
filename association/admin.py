@@ -168,3 +168,48 @@ class SuggestionAdmin(admin.ModelAdmin):
         "subject",
         "name",
     )
+
+
+from django.contrib import admin
+from .models import Complaint, Suggestion
+
+
+@admin.register(Complaint)
+class ComplaintAdmin(admin.ModelAdmin):
+    list_display = (
+        "complaint_number",
+        "name",
+        "house_number",
+        "mobile_number",
+        "complaint_category",
+        "status",
+        "complaint_date",
+    )
+    search_fields = (
+        "complaint_number",
+        "name",
+        "house_number",
+        "mobile_number",
+    )
+    list_filter = (
+        "status",
+        "complaint_category",
+    )
+
+
+@admin.register(Suggestion)
+class SuggestionAdmin(admin.ModelAdmin):
+    list_display = (
+        "suggestion_number",
+        "name",
+        "house_no",
+        "mobile",
+        "subject",
+        "created_at",
+    )
+    search_fields = (
+        "suggestion_number",
+        "name",
+        "house_no",
+        "mobile",
+    )
