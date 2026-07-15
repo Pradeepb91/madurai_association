@@ -14,7 +14,7 @@
 
         <p class="text-muted">
 
-            Office Bearers & Committee Members
+           Committee Members
 
         </p>
 
@@ -30,8 +30,11 @@
 
                 <div class="card-body">
 
-                    <img src="{{ member.photo.url }}"
-                         class="member-photo mb-3">
+                    <img
+    src="{{ member.get_photo }}"
+    alt="{{ member.name }}"
+    class="member-photo mb-3"
+    onerror="this.src='/static/images/default-user.png';">
 
                     <h5 class="fw-bold">
 

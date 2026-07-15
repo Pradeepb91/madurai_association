@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+import os
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -24,12 +24,15 @@ SECRET_KEY = 'django-insecure-nuphbdp%n47f58xw*%%@akg*p(k8$sa$!7!d0_7fo5v-az!3^#
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+import os
+import dj_database_url
+
 
 
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "madurai-newlig-association.onrender.com",
+    "madurai-association.onrender.com",
     ".onrender.com",
     "127.0.0.1",
     "localhost",
@@ -54,6 +57,8 @@ INSTALLED_APPS = [
     'reports',
     'activities',
     'contact',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 
@@ -93,10 +98,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
 
 
@@ -149,3 +155,23 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/portal/"	
+
+import cloudinary
+
+import cloudinary
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True,
+)
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
