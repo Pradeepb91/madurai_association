@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-nuphbdp%n47f58xw*%%@akg*p(k8$sa$!7!d0_7fo5v-az!3^#
 
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "madurai-newlig-association.onrender.com",
